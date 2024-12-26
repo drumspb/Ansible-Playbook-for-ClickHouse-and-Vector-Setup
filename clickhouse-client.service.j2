@@ -1,0 +1,14 @@
+[Unit]
+Description=ClickHouse Client Service
+After=network.target clickhouse-server.service
+
+[Service]
+ExecStart=/usr/bin/clickhouse-client --host 127.0.0.1 --port 9000 --user default
+Restart=always
+User={{ ansible_user }}
+Group={{ ansible_user }}
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
+

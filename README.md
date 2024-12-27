@@ -1,11 +1,12 @@
-# README: Ansible Playbook for ClickHouse and Vector Setup
+# README: Ansible Playbook for ClickHouse, Vector, and LightHouse Setup
 
 ## Overview
-This Ansible playbook is designed to:
-- Install and configure ClickHouse (a columnar database for analytics).
-- Install and configure Vector (a log aggregation tool).
+This Ansible playbook automates the installation and configuration of the following services:
+- **ClickHouse**: A columnar database designed for analytics.
+- **Vector**: A log aggregation tool for collecting, processing, and shipping data.
+- **LightHouse**: A static web server for displaying analytical data.
 
-The playbook performs tasks such as downloading and installing specific versions of the software, configuring services using systemd, and deploying configurations. It supports customization through variables and tagging.
+The playbook handles tasks such as downloading and installing specific versions, configuring services, and deploying necessary configurations. It supports customization through variables and tagging.
 
 ---
 
@@ -16,9 +17,9 @@ The playbook performs tasks such as downloading and installing specific versions
 
 #### Description:
 This playbook:
-- Downloads the specified version of ClickHouse packages.
+- Downloads and installs the specified version of ClickHouse.
 - Installs ClickHouse components: `clickhouse-common-static`, `clickhouse-client`, and `clickhouse-server`.
-- Configures `clickhouse-server` as a systemd service.
+- Configures the `clickhouse-server` service as a systemd service.
 - Creates a database named `logs`.
 
 #### Variables:
@@ -68,6 +69,24 @@ This playbook:
 
 ---
 
+### 3. LightHouse Configuration
+#### Playbook Name: `Install and configure LightHouse`
+
+#### Description:
+This playbook:
+- Installs necessary packages for LightHouse.
+- Downloads and extracts LightHouse static files.
+- Configures Nginx to serve LightHouse.
+- Starts and enables the Nginx service.
+
+#### Tasks:
+- Install required packages (e.g., `nginx`).
+- Download and extract LightHouse files.
+- Deploy Nginx configuration for LightHouse.
+- Start and enable Nginx service.
+
+---
+
 ## Usage
 
 ### Prerequisites:
@@ -79,8 +98,14 @@ This playbook:
 [clickhouse]
 clickhouse_host ansible_host=192.168.1.10
 
+[vector]
+vector_host ansible_host=192.168.1.20
+
+[lighthouse]
+lighthouse_host ansible_host=192.168.1.30
+
 [all]
-all_hosts ansible_host=192.168.1.20
+all_hosts ansible_host=192.168.1.40
 ```
 
 ### Run the Playbook:
@@ -97,6 +122,11 @@ ansible-playbook site.yml --tags "clickhouse"
 To apply only Vector-related tasks:
 ```bash
 ansible-playbook site.yml --tags "vector"
+```
+
+To apply only LightHouse-related tasks:
+```bash
+ansible-playbook site.yml --tags "lighthouse"
 ```
 
 ---
@@ -119,4 +149,3 @@ ansible-playbook site.yml --tags "vector"
 
 ## License
 This playbook is open-source and available under the MIT license.
-

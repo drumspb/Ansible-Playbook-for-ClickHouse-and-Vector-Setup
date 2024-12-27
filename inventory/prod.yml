@@ -2,9 +2,23 @@
 clickhouse:
   hosts:
     prod_host:
-      ansible_host: 192.168.121.221
-      ansible_user: vagrant
-      ansible_ssh_private_key_file: ~/.vagrant/machines/default/libvirt/private_key
+      ansible_host: 84.201.137.243
+      ansible_user: drum
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+      ansible_python_interpreter: /usr/bin/python3
 
-    # centos7:
-    #   ansible_connection: docker
+vector:
+  hosts:
+    prod_host:
+      ansible_host: 84.201.137.108
+      ansible_user: drum
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519  
+      ansible_python_interpreter: /usr/bin/python3
+
+lighthouse:
+  hosts:
+    prod_host:
+      ansible_host: 84.201.152.163
+      ansible_user: drum
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+      ansible_python_interpreter: /usr/bin/python3

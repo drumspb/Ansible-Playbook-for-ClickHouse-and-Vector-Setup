@@ -1,0 +1,13 @@
+[Unit]
+Description=Vector Service
+After=network.target
+
+[Service]
+ExecStart=/bin/vector --config /etc/vector/vector.toml
+Restart=always
+User={{ ansible_user }}
+Group={{ ansible_user }}
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target

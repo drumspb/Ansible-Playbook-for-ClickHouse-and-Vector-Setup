@@ -1,0 +1,4 @@
+#SPDX-License-Identifier: MIT-0
+---
+vector_config_file: "/etc/vector/vector.toml"
+vector_template_src: "vector.toml.j2"
